@@ -11,12 +11,17 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
-  const [prevGuesses, nextPrevGuesses] = React.useState(['FIRST', 'SECOND']);
+  const [prevGuesses, setPrevGuesses] = React.useState([]);
 
   return (
     <>
-      <ShowGuesses prevGuesses={prevGuesses} />
-      <GuessInput />
+      <ShowGuesses 
+        prevGuesses={prevGuesses} 
+      />
+      <GuessInput 
+        prevGuesses={prevGuesses}
+        setPrevGuesses={setPrevGuesses}
+      />
     </>
   );
 }

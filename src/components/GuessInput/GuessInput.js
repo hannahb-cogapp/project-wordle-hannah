@@ -1,6 +1,6 @@
 import React from 'react';
 
-function GuessInput() {
+function GuessInput({prevGuesses, setPrevGuesses}) {
   const [guess, setGuess] = React.useState(''); 
 
   function handleSubmit(event) {
@@ -8,6 +8,16 @@ function GuessInput() {
 
     console.log( {guess} );
     setGuess('');
+    
+    if (prevGuesses.length > 4) {
+      alert('Max. 5 guesses reached');
+      return;
+    }
+
+    prevGuesses.push(guess);
+    nextPrevGuesses = [...prevGuesses];
+    setPrevGuesses(nextPrevGuesses);
+
   }
 
   return (
