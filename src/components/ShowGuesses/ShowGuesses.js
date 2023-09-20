@@ -4,9 +4,9 @@ function ShowGuesses({prevGuesses}) {
   return (
     <>
       <div className="guess-results">
-        {prevGuesses.map(prevGuess => (
+        {prevGuesses.map((prevGuess, index) => (
           <p 
-            key={crypto.randomUUID()}
+            key={index}
             className="guess"
           >
             {prevGuess}
