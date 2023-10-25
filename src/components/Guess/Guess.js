@@ -4,7 +4,7 @@ import { range } from '../../utils';
 import { checkGuess } from '../../game-helpers';
 
 function Guess({ value, answer }) {
-  const letterStatus = value ? checkGuess(value, answer) : undefined;
+  const letterStatus = checkGuess(value, answer);
   
   return (
     <p className="guess">
