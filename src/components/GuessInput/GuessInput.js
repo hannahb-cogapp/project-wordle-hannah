@@ -1,48 +1,34 @@
 import React from 'react';
 
-function GuessInput({prevGuesses, setPrevGuesses}) {
-  const [guess, setGuess] = React.useState(''); 
+function GuessInput({ handleSubmitGuess }) {
+  const [tentativeGuess, setTentativeGuess] = React.useState('');
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    console.log( {guess} );
-    setGuess('');
-    
-    if (prevGuesses.length > 4) {
-      alert('Max. 5 guesses reached');
-      return;
-    }
+    handleSubmitGuess(tentativeGuess);
 
-    prevGuesses.push(guess);
-    nextPrevGuesses = [...prevGuesses];
-    setPrevGuesses(nextPrevGuesses);
-
+    setTentativeGuess('');
   }
 
   return (
-    <>
-      <form 
-        className="guess-input-wrapper"
-        onSubmit={handleSubmit}
-      >
-        <label 
-          htmlFor="guess-input">
-            Enter guess:
-        </label>
-        <input 
-          id="guess-input" 
-          type="text" 
-          value={guess}
-          pattern="[A-Za-z]{5}"
-          title="5 letter word"
-          onChange={(event) => {
-            setGuess(event.target.value.toUpperCase());
-          }}/>
-      </form>
-      <p>Search term: {guess}</p>
-    </>
-
+    <form onSubmit={handleSubmit} className="guess-input-wrapper">
+      <label htmlFor="guess-input">Enter guess:</label>
+      <input
+        required
+        minLength={5}
+        maxLength={5}
+        pattern="[a-zA-Z]{5}"
+        title="5 letter word"
+        value={tentativeGuess}
+        onChange={(event) => {
+          const nextGuess = event.target.value.toUpperCase();
+          setTentativeGuess(nextGuess);
+        }}
+        id="guess-input"
+        type="text"
+      />
+    </form>
   );
 }
 
