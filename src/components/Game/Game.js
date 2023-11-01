@@ -14,29 +14,25 @@ console.info({ answer });
 
 function Game() {
   const [guesses, setGuesses] = React.useState([]);
-  const [gameWon, setGameWon] = React.useState(false);
-  const [gameLost, setGameLost] = React.useState(false);
-  const [inputDisabled, setInputDisabled] = React.useState(false);
-
+  const [gameStatus, setGameStatus] = React.useState('running');
 
   function handleSubmitGuess(tentativeGuess) {
-    setGuesses([...guesses, tentativeGuess]);
+    const nextGuesses = [...guesses, tentativeGuess];
+    setGuesses(nextGuesses);
 
     if (tentativeGuess === answer) {
-      setGameWon(true);
-      setInputDisabled(true);
-    } else if (guesses.length === NUM_OF_GUESSES_ALLOWED - 1) {
-      setGameLost(true);
-      setInputDisabled(true);
+      setGameStatus('won');
+    } else if (nextGuesses.length >= NUM_OF_GUESSES_ALLOWED) {
+      setGameStatus('lost');
     }
   }
 
   return (
     <>
       <GuessResults guesses={guesses} answer={answer} />
-      <GuessInput handleSubmitGuess={handleSubmitGuess} inputDisabled={inputDisabled} />
-      { gameWon && <Banner state='happy' attempts={guesses.length} answer={answer} />}
-      { gameLost && <Banner state='sad' attempts={guesses.length} answer={answer} />}
+      <GuessInput handleSubmitGuess={handleSubmitGuess} gameStatus={gameStatus} />
+      { gameStatus === 'won' && <Banner state='happy' attempts={guesses.length} answer={answer} />}
+      { gameStatus === 'lost' && <Banner state='sad' attempts={guesses.length} answer={answer} />}
     </>
   );
 }
