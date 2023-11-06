@@ -40,6 +40,22 @@ button {
   color: inherit;
 }
 
+.reset-btn {
+  border: solid 1px white;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.happy .reset-btn:hover {
+  background-color: white; 
+  color: green; 
+}
+
+.sad .reset-btn:hover {
+  background-color: white; 
+  color: red; 
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
